@@ -4,7 +4,7 @@
 
 ## 1.1 The Core Crisis: Ecosystem-Wide Paralysis
 
-The 2065 cyber disaster orchestrated by the Super Malware Agent has resulted in a catastrophic, system-wide failure of the global financial infrastructure. The fundamental issue exposed by this attack is the vulnerability of traditional, monolithic banking architectures. Because legacy systems lacked isolated fail-safes, the malware was able to trigger a cascading failure that simultaneously disabled core banking, ATMs, digital payment gateways, and loan platforms.
+The 2065 cyber disaster orchestrated by the Super Malware Agent has resulted in a catastrophic, system-wide failure of the global financial infrastructure, affecting an estimated **2.3 billion users** across 190 countries. The fundamental issue exposed by this attack is the vulnerability of traditional, monolithic banking architectures. By 2065, approximately **94% of all financial transactions** were processed digitally, meaning the malware's impact was near-total. Because legacy systems lacked isolated fail-safes, the malware was able to trigger a cascading failure that simultaneously disabled core banking, ATMs, digital payment gateways, and loan platforms. Within 72 hours of the initial breach, the global economy experienced an estimated **$4.7 trillion** contraction in GDP — the single largest economic disruption in recorded history.
 
 ### Cascading Failure Visualization
 
@@ -121,13 +121,15 @@ graph TD
     style VUL fill:#fd79a8,stroke:#e84393,color:#333
 ```
 
-*   **Economic Stagnation for Small Businesses:** Small to medium enterprises (SMEs) are completely unable to process digital transactions, halting commerce, supply chains, and payroll operations. An estimated 78% of global SMEs relied exclusively on digital payment infrastructure, now rendering them operationally defunct.
+*   **Economic Stagnation for Small Businesses:** Small to medium enterprises (SMEs) are completely unable to process digital transactions, halting commerce, supply chains, and payroll operations. An estimated **78% of global SMEs** relied exclusively on digital payment infrastructure, now rendering them operationally defunct. Projections indicate that without restoration within 90 days, over **40% of affected SMEs** will face permanent closure, resulting in the loss of approximately **350 million jobs** worldwide.
 
-*   **Financial Exclusion & Inequality:** The forced regression to a cash-only society disproportionately harms vulnerable populations who rely heavily on secure digital financial services for their daily survival. The lack of secure banking has immediately widened global financial inequality, reversing decades of financial inclusion progress.
+*   **Financial Exclusion & Inequality:** The forced regression to a cash-only society disproportionately harms vulnerable populations who rely heavily on secure digital financial services for their daily survival. By 2065, an estimated **1.6 billion previously unbanked individuals** had gained digital financial access through mobile banking — progress that has now been entirely reversed. The lack of secure banking has immediately widened global financial inequality, erasing decades of financial inclusion progress and pushing an estimated **800 million people** below the poverty threshold.
 
-*   **Erosion of Public Trust:** The inability of millions of users to access their own capital has fundamentally shattered public confidence in digital financial institutions. Rebuilding this trust requires not just a functional system, but a demonstrably *superior* and *transparent* one.
+*   **Erosion of Public Trust:** The inability of **2.3 billion users** to access their own capital has fundamentally shattered public confidence in digital financial institutions. Surveys from the immediate aftermath indicate that **67% of affected users** express reluctance to return to digital banking without demonstrated proof of enhanced security. Rebuilding this trust requires not just a functional system, but a demonstrably *superior* and *transparent* one.
 
-*   **Government Service Disruption:** Social welfare payments, pensions, and government subsidies delivered through digital banking channels have ceased entirely, creating a humanitarian dimension to the crisis.
+*   **Government & Humanitarian Crisis:** Social welfare payments, pensions, disability benefits, and government subsidies delivered through digital banking channels have ceased entirely. An estimated **420 million individuals** who depend on government digital disbursements — including elderly pensioners, people with disabilities, and refugees receiving aid — are now without any means of support. International remittances, which totaled **$1.2 trillion annually** by 2065, have been completely blocked, cutting off a critical lifeline for families in developing nations.
+
+*   **Regulatory & Compliance Collapse:** Financial regulatory frameworks built around digital audit trails, real-time compliance monitoring, and automated reporting have been rendered inoperable. Central banks across 190 countries lack the infrastructure to enforce monetary policy, monitor inflation, or manage currency reserves, creating a systemic risk of runaway inflation and currency devaluation in smaller economies.
 
 ---
 
