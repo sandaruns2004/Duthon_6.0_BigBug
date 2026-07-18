@@ -106,16 +106,16 @@ gantt
     dateFormat  YYYY-MM-DD
     
     section Phase 01 - RECON
-    Online: Planning & Design       :active, p1, 2026-07-18, 2026-07-22
-    Winners Announced (5 PM)        :milestone, m1, 2026-07-24, 0d
+    Online - Planning and Design       :active, p1, 2026-07-18, 2026-07-22
+    Winners Announced (5 PM)           :milestone, m1, 2026-07-24, 0d
     
     section Phase 02 - REBUILD
-    Online: Development             :p2, 2026-07-25, 2026-07-31
-    Winners Announced (5 PM)        :milestone, m2, 2026-08-02, 0d
+    Online - Development               :p2, 2026-07-25, 2026-07-31
+    Winners Announced (5 PM)           :milestone, m2, 2026-08-02, 0d
     
     section Phase 03 - FORTIFY
-    On-site at NSBM: Deploy & Defend :crit, p3, 2026-08-06, 1d
-    Winners Announced (5 PM)         :milestone, m3, 2026-08-06, 0d
+    On-site at NSBM - Deploy and Defend :crit, p3, 2026-08-06, 1d
+    Winners Announced (5 PM)            :milestone, m3, 2026-08-06, 0d
 ```
 
 | Phase  | Name        | Type              | Date                 | Time                | Description                                                          |
