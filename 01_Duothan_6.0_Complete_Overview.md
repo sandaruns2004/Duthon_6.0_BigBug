@@ -21,6 +21,7 @@ This is the **6th edition** of the competition. Unlike traditional hackathons th
 A **massive global cyber disaster** caused by a **"Super Malware Agent"** has destroyed digital systems across all sectors worldwide — governments, healthcare, transportation, businesses, and **most critically, the financial sector**.
 
 #### What happened to the financial sector:
+
 - ❌ Core banking systems — **DOWN**
 - ❌ ATMs — **OFFLINE**
 - ❌ Digital payment platforms — **DESTROYED**
@@ -31,16 +32,20 @@ A **massive global cyber disaster** caused by a **"Super Malware Agent"** has de
 - ❌ Economic recovery slowed, financial inequality increased
 
 #### What survived:
+
 - ✅ Customer databases are **SAFE** (thanks to secure backups)
 - ✅ No user information was lost
 
 #### The catch:
+
 - 🔐 The **Master Key** to unlock the banking network is hidden behind **strong security layers**
 
 ### Your Mission
+
 > **Save the digital banking system** — Design, build, and deploy a **secure, reliable, and inclusive financial platform** from the ground up.
 
 The new platform must:
+
 - Use **modern cybersecurity** practices
 - Leverage **cloud technology**
 - Employ **intelligent automation**
@@ -52,13 +57,14 @@ The new platform must:
 
 ## 🗺️ Competition Structure — 3 Phases
 
-| Phase | Name | Type | Date | Time | Description |
-|-------|------|------|------|------|-------------|
-| **01** | **RECON** | 🌐 Online | 18 Jul – 22 Jul 2026 | 6:00 AM – 11:59 PM | Assess the damage. Design the recovery. Create the blueprint. |
-| **02** | **REBUILD** | 🌐 Online | 25 Jul – 31 Jul 2026 | 12:00 AM – 11:59 PM | Develop secure solutions. Restore systems. Apply security practices. |
-| **03** | **FORTIFY** | 🏛️ On-site (NSBM) | 06 Aug 2026 | 8:30 AM – 3:30 PM | Deploy, integrate, and defend infrastructure. Live judging. |
+| Phase  | Name        | Type              | Date                 | Time                | Description                                                          |
+| ------ | ----------- | ----------------- | -------------------- | ------------------- | -------------------------------------------------------------------- |
+| **01** | **RECON**   | 🌐 Online         | 18 Jul – 22 Jul 2026 | 6:00 AM – 11:59 PM  | Assess the damage. Design the recovery. Create the blueprint.        |
+| **02** | **REBUILD** | 🌐 Online         | 25 Jul – 31 Jul 2026 | 12:00 AM – 11:59 PM | Develop secure solutions. Restore systems. Apply security practices. |
+| **03** | **FORTIFY** | 🏛️ On-site (NSBM) | 06 Aug 2026          | 8:30 AM – 3:30 PM   | Deploy, integrate, and defend infrastructure. Live judging.          |
 
 ### Winners Announcements:
+
 - Phase 01 winners: **24 July 2026 at 5:00 PM**
 - Phase 02 winners: **02 August 2026 at 5:00 PM**
 - Phase 03 winners: **06 August 2026 at 5:00 PM**
@@ -69,20 +75,20 @@ The new platform must:
 
 ## 👥 Team Rules
 
-| Rule | Details |
-|------|---------|
-| **Team Size** | 2–4 members |
-| **University** | All members must be from the **same university** (no cross-university teams) |
-| **Eligibility** | Open to all **Sri Lankan undergraduates** |
-| **Changes** | Team changes require organizer approval before registration closes; no changes after |
+| Rule            | Details                                                                              |
+| --------------- | ------------------------------------------------------------------------------------ |
+| **Team Size**   | 2–4 members                                                                          |
+| **University**  | All members must be from the **same university** (no cross-university teams)         |
+| **Eligibility** | Open to all **Sri Lankan undergraduates**                                            |
+| **Changes**     | Team changes require organizer approval before registration closes; no changes after |
 
 ---
 
 ## 🏅 Prizes
 
-| Position | Prize (LKR) |
-|----------|-------------|
-| 🥇 **Champion** | **Rs. 50,000** |
+| Position             | Prize (LKR)    |
+| -------------------- | -------------- |
+| 🥇 **Champion**      | **Rs. 50,000** |
 | 🥈 **1st Runner Up** | **Rs. 30,000** |
 | 🥉 **2nd Runner Up** | **Rs. 20,000** |
 
@@ -104,6 +110,7 @@ The new platform must:
 ## 📋 Delegate Checklist (What to Bring)
 
 ### Must-Have Items:
+
 - [ ] NIC (National Identity Card)
 - [ ] Registration confirmation (digital)
 - [ ] Laptop, charger, and required peripherals
@@ -112,6 +119,7 @@ The new platform must:
 - [ ] **AWS, GCP, or Azure Account** ← Very important!
 
 ### For On-site Phase (Phase 3):
+
 - [ ] Arrive at NSBM Green University with time to spare for check-in
 - [ ] Digital copy of team roster
 - [ ] Organizing committee's contact details on hand
@@ -120,13 +128,13 @@ The new platform must:
 
 ## 📞 Contact & Support
 
-| Role | Name | Email |
-|------|------|-------|
-| **Chairperson - Duothan 6.0** | Janith Wathsala | wathsala@ieeensbm.org |
-| **Chairwomen - Duothan 6.0** | Dinithi Dias | dinithi@ieeensbm.org |
-| **Chairperson - IEEE SB NSBM** | Dasun Sri Nethmal | nethmalds@ieee.org |
+| Role                           | Name                 | Email                        |
+| ------------------------------ | -------------------- | ---------------------------- |
+| **Chairperson - Duothan 6.0**  | Janith Wathsala      | wathsala@ieeensbm.org        |
+| **Chairwomen - Duothan 6.0**   | Dinithi Dias         | dinithi@ieeensbm.org         |
+| **Chairperson - IEEE SB NSBM** | Dasun Sri Nethmal    | nethmalds@ieee.org           |
 | **Chairperson - IEEE CS NSBM** | Kumuditha Ranasinghe | kumuditharanasinghe@ieee.org |
-| **General Queries** | — | duothan@ieeensbm.org |
+| **General Queries**            | —                    | duothan@ieeensbm.org         |
 
 ---
 
