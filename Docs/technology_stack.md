@@ -28,10 +28,11 @@ graph TD
         KONG["Kong API Gateway<br/><i>Traffic Management</i>"]
     end
     
-    subgraph DB["🗄️ DATABASES"]
+    subgraph DB["🗄️ DATABASES & STORAGE"]
         PG["PostgreSQL<br/><i>Financial Data (ACID)</i>"]
         MG["MongoDB<br/><i>Logs & Notifications</i>"]
         RD["Redis<br/><i>Cache & Sessions</i>"]
+        S3["AWS S3<br/><i>Document Storage</i>"]
     end
     
     subgraph MSG["📨 MESSAGING"]
@@ -49,6 +50,7 @@ graph TD
     subgraph OBS["📊 OBSERVABILITY"]
         PROME["Prometheus + Grafana<br/><i>Metrics & Dashboards</i>"]
         ELKS["ELK Stack<br/><i>Centralized Logging</i>"]
+        JAEG["Jaeger + OpenTelemetry<br/><i>Distributed Tracing</i>"]
     end
     
     subgraph SEC["🔒 SECURITY"]
@@ -96,9 +98,10 @@ graph TD
 
 | Technology | Purpose | Justification |
 |-----------|---------|---------------|
-| **PostgreSQL** | Primary database for financial data | **ACID compliance is mandatory** for banking transactions (FR-15). PostgreSQL provides strong data integrity with support for transactions, foreign keys, and constraints. Advanced features include **Write-Ahead Logging (WAL)** for continuous replication (supporting NFR-12: RPO < 1hr) and native support for **row-level security** and **encryption at rest**. Used for 6 service databases (Auth, Users, Accounts, Transactions, Payments, Loans). |
-| **MongoDB** | NoSQL database for non-financial data | **Flexible schema** handles varied log structures, ML model data, and notification templates that don't require strict relational constraints. Excellent **horizontal scaling** for high-volume write operations — every user action generates audit logs (NFR-10). Used for 3 service databases (Notifications, Audit, Fraud Detection). |
-| **Redis** | In-memory cache and session store | **Sub-millisecond read latency** for session validation (NFR-18: API response < 200ms). Reduces PostgreSQL read load by **60-80%** for frequently accessed data (account balances, rate limiting counters). TTL-based key expiration perfectly suits JWT session management (NFR-09). |
+| **PostgreSQL** | Primary database for financial data | **ACID compliance is mandatory** for banking transactions (FR-15). PostgreSQL provides strong data integrity with support for transactions, foreign keys, and constraints. Advanced features include **Write-Ahead Logging (WAL)** for continuous replication (supporting NFR-12: RPO < 1hr) and native support for **row-level security** and **encryption at rest**. Used for 8 service databases (Auth, Users, Accounts, Transactions, Payments, Loans, OTP, Admin). |
+| **MongoDB** | NoSQL database for non-financial data | **Flexible schema** handles varied log structures, ML model data, and notification templates that don't require strict relational constraints. Excellent **horizontal scaling** for high-volume write operations — every user action generates audit logs (NFR-10). Used for 4 service databases (Notifications, Audit, Fraud Detection, Email). |
+| **Redis** | In-memory cache and session store | **Sub-millisecond read latency** for session validation (NFR-18: API response < 200ms). Reduces PostgreSQL read load by **60-80%** for frequently accessed data (account balances, rate limiting counters). TTL-based key expiration perfectly suits JWT session management and scheduled job queues. |
+| **AWS S3** | Object storage | Cost-effective, infinitely scalable storage for binary files. Server-side AES-256 encryption. Required for FR-11 (KYC upload), FR-13 (PDF statements), and FR-19 (digital receipts) via the Document Service. |
 
 ### Messaging Layer
 
@@ -121,7 +124,8 @@ graph TD
 | Technology | Purpose | Justification |
 |-----------|---------|---------------|
 | **Prometheus + Grafana** | Metrics collection and dashboards | Prometheus is the **industry standard** for Kubernetes-native metrics collection. Pull-based model automatically discovers services. Grafana provides **real-time visualization dashboards** (NFR-30) with alerting capabilities (NFR-31). Both are open-source, reducing licensing costs. |
-| **ELK Stack** (Elasticsearch, Logstash, Kibana) | Centralized logging | Aggregates logs from all 10 microservices into a **single searchable platform** (NFR-29). Logstash parses and transforms structured JSON logs. Elasticsearch provides **full-text search** across billions of log entries. Kibana enables visual log analysis and anomaly detection. Essential for post-incident forensics. |
+| **ELK Stack** (Elasticsearch, Logstash, Kibana) | Centralized logging | Aggregates logs from all 15 microservices into a **single searchable platform** (NFR-29). Logstash parses and transforms structured JSON logs. Elasticsearch provides **full-text search** across billions of log entries. Kibana enables visual log analysis and anomaly detection. Essential for post-incident forensics. |
+| **Jaeger (OpenTelemetry)** | Distributed tracing | Traces a single request as it travels across all 15 microservices using correlation IDs (NFR-32). Crucial for debugging latency issues, identifying bottlenecks, and auditing the exact path of financial transactions. |
 
 ### Security Layer
 
