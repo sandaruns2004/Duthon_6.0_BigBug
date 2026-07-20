@@ -4,7 +4,7 @@
 
 ## Overview
 
-The AegisVault technology stack has been carefully selected to support three non-negotiable architectural requirements mandated by the competition:
+The technology stack has been carefully selected to support three non-negotiable architectural requirements mandated by the competition:
 
 1. **Independent services architecture** (microservices) — each technology must enable service isolation and independent deployment
 2. **Security-first design** — every tool must support the defense-in-depth strategy required after the 2065 cyberattack

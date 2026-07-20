@@ -4,7 +4,7 @@
 
 ## Overview
 
-The following high-fidelity wireframes represent the planned user interface for the **AegisVault** digital banking platform. The design follows modern fintech UX best practices with a focus on **trust, clarity, security, and accessibility** — critical for a platform that must rebuild public confidence after the 2065 cyberattack.
+The following high-fidelity wireframes represent the planned user interface for **our new** digital banking platform. The design follows modern fintech UX best practices with a focus on **trust, clarity, security, and accessibility** — critical for a platform that must rebuild public confidence after the 2065 cyberattack.
 
 ### Design Principles Applied
 
@@ -53,7 +53,7 @@ The entry point for all users. Supports traditional credential-based login and b
 - Security badge visible to reassure users about encryption
 - Clean, professional design establishes trust from the first interaction
 
-![Screen 1: AegisVault Login Screen](C:\Users\ADMIN\Desktop\Duthon_6.0_BigBug\Docs\wireframes\01_login.png)
+![Screen 1: Login Screen](C:\Users\ADMIN\Desktop\Duthon_6.0_BigBug\Docs\wireframes\01_login.png)
 
 ---
 

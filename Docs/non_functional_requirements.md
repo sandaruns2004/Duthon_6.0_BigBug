@@ -4,7 +4,7 @@
 
 ## Overview
 
-The following non-functional requirements define **how AegisVault performs** — the quality standards that ensure the platform is secure, resilient, performant, and production-ready. Given that the 2065 crisis was caused by a cyberattack exploiting architectural weaknesses, this section **heavily emphasizes security, disaster recovery, cloud performance, and reliability** as mandated by the competition brief.
+The following non-functional requirements define **how our solution performs** — the quality standards that ensure the platform is secure, resilient, performant, and production-ready. Given that the 2065 crisis was caused by a cyberattack exploiting architectural weaknesses, this section **heavily emphasizes security, disaster recovery, cloud performance, and reliability** as mandated by the competition brief.
 
 All NFRs use **specific, measurable values** to enable objective verification.
 
@@ -12,7 +12,7 @@ All NFRs use **specific, measurable values** to enable objective verification.
 
 ## 6.1 Security (CRITICAL)
 
-> Given the catastrophic failure caused by the Super Malware Agent, security is the **most critical quality attribute** of AegisVault. Every layer of the system is designed with defense-in-depth.
+> Given the catastrophic failure caused by the Super Malware Agent, security is the **most critical quality attribute** of our solution. Every layer of the system is designed with defense-in-depth.
 
 | ID | Requirement | Metric |
 |----|-------------|--------|
@@ -31,7 +31,7 @@ All NFRs use **specific, measurable values** to enable objective verification.
 
 ## 6.2 Disaster Recovery (CRITICAL)
 
-> The entire premise of Duothan 6.0 is recovering from a catastrophic system failure. AegisVault's disaster recovery capabilities are architected as first-class design concerns.
+> The entire premise of Duothan 6.0 is recovering from a catastrophic system failure. Our solution's disaster recovery capabilities are architected as first-class design concerns.
 
 | ID | Requirement | Metric |
 |----|-------------|--------|

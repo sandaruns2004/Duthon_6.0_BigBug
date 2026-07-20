@@ -4,7 +4,7 @@
 
 ## 3.1 Architecture Overview
 
-AegisVault is built on a **microservices-first architecture** organized into 10 distinct layers. Each layer serves a specific purpose, and every microservice operates independently with its own database, ensuring that the cascading failure that destroyed the legacy monolithic system in 2065 is architecturally impossible.
+**Our solution** is built on a **microservices-first architecture** organized into 10 distinct layers. Each layer serves a specific purpose, and every microservice operates independently with its own database, ensuring that the cascading failure that destroyed the legacy monolithic system in 2065 is architecturally impossible.
 
 ```mermaid
 graph TB
@@ -261,7 +261,7 @@ graph LR
 
 ## 3.4 Data Flow: Complete Transaction Lifecycle
 
-This diagram shows how a single fund transfer flows through the entire AegisVault system, demonstrating the security and isolation at every step:
+This diagram shows how a single fund transfer flows through the entire system, demonstrating the security and isolation at every step:
 
 ```mermaid
 sequenceDiagram
@@ -441,7 +441,7 @@ graph LR
         OA --> OF["💀 Total system failure"]
     end
     
-    subgraph NEW["✅ AEGISVAULT MICROSERVICES"]
+    subgraph NEW["✅ OUR SOLUTION MICROSERVICES"]
         direction TB
         NM["🦠 Malware targets<br/>one service"] --> NC["⚠️ One container<br/>compromised"]
         NC --> NI["🛡️ Breach CONTAINED<br/>to that service only"]
@@ -455,7 +455,7 @@ graph LR
     style NO fill:#27ae60,stroke:#1e8449,color:#fff,stroke-width:2px
 ```
 
-| Failure Scenario | Old Monolithic System | AegisVault (Microservices) |
+| Failure Scenario | Old Monolithic System | Our Solution (Microservices) |
 |-----------------|----------------------|---------------------------|
 | **Auth service breached** | Entire system compromised (shared database) | Only auth service affected; Istio circuit breaker isolates it; other services continue with cached sessions |
 | **Database corrupted** | ALL data lost (single shared DB) | Only the affected service's data impacted; 13 other databases unaffected |
@@ -468,7 +468,7 @@ graph LR
 
 ## 3.9 Data Migration — Legacy Backup Recovery
 
-The Phase 1 brief states: *"Customer databases are safe because of secure backups."* The Data Migration Service bridges the uncorrupted legacy backups into AegisVault's new database-per-service architecture:
+The Phase 1 brief states: *"Customer databases are safe because of secure backups."* The Data Migration Service bridges the uncorrupted legacy backups into our new database-per-service architecture:
 
 ```mermaid
 graph LR
@@ -480,7 +480,7 @@ graph LR
     
     MIGRATE2["🔀 Data Migration<br/>Service<br/><i>ETL Pipeline</i><br/>Decrypt · Transform · Load"] 
     
-    subgraph NEW2["✅ AEGISVAULT (New Platform)"]
+    subgraph NEW2["✅ OUR SOLUTION (New Platform)"]
         NUSER["🗄️ Users DB"]
         NACC["🗄️ Accounts DB"]
         NTXN["🗄️ Transactions DB"]

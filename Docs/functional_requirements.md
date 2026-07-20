@@ -4,7 +4,7 @@
 
 ## Overview
 
-The following functional requirements define **what AegisVault must do** from the user's perspective. Requirements are grouped by domain and numbered for traceability. Each requirement is written to be specific, testable, and directly traceable to the features outlined in the Proposed Solution (Section 02).
+The following functional requirements define **what our solution must do** from the user's perspective. Requirements are grouped by domain and numbered for traceability. Each requirement is written to be specific, testable, and directly traceable to the features outlined in the Proposed Solution (Section 02).
 
 ---
 
@@ -39,7 +39,7 @@ The following functional requirements define **what AegisVault must do** from th
 
 | ID | Requirement | Priority |
 |----|-------------|----------|
-| **FR-14** | The system shall allow users to transfer funds to other accounts within the AegisVault platform with real-time confirmation and receipt generation. | 🔴 Must |
+| **FR-14** | The system shall allow users to transfer funds to other accounts within the platform with real-time confirmation and receipt generation. | 🔴 Must |
 | **FR-15** | The system shall process all financial transactions atomically — ensuring that both debit and credit operations either complete fully or not at all (ACID compliance). | 🔴 Must |
 | **FR-16** | The system shall allow users to make utility bill payments (electricity, water, internet, mobile) through integrated payment processing. | 🔴 Must |
 | **FR-17** | The system shall support scheduled and recurring payments, allowing users to set up automatic transfers on specified dates and frequencies. | 🟡 Should |
