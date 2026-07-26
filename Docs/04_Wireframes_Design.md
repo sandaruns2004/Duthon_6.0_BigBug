@@ -1,6 +1,4 @@
-# 04. Wireframes Design
-
----
+### **`04.` Wireframes Design**
 
 ## Overview
 
@@ -41,8 +39,6 @@ graph TD
     style ADMIN fill:#f39c12,stroke:#e67e22,color:#fff
 ```
 
----
-
 ## Screen 1: Login / Registration
 
 The entry point for all users. Supports traditional credential-based login and biometric authentication (fingerprint/face recognition) for returning users.
@@ -55,8 +51,6 @@ The entry point for all users. Supports traditional credential-based login and b
 
 ![Screen 1: Login Screen](../screenshots/Screenshot%202026-07-20%20202920.png)
 
----
-
 ## Screen 2: MFA Verification
 
 Multi-factor authentication screen requiring a 6-digit OTP sent to the user's registered phone number. This screen appears after every login to enforce FR-02 (mandatory MFA).
@@ -68,8 +62,6 @@ Multi-factor authentication screen requiring a 6-digit OTP sent to the user's re
 - Shield icon reinforces the security-focused design
 
 ![Screen 2: MFA Verification Screen](../screenshots/Screenshot%202026-07-20%20202935.png)
-
----
 
 ## Screen 3: Dashboard / Home
 
@@ -84,8 +76,6 @@ The primary screen users see after authentication. Displays real-time account ba
 
 ![Screen 3: Dashboard / Home Screen](../screenshots/Screenshot%202026-07-20%20202951.png)
 
----
-
 ## Screen 4: Send Money / Transfer
 
 Core transaction screen for fund transfers (FR-14). Designed for speed — users can complete a transfer in 3 steps: select recipient → enter amount → confirm.
@@ -98,8 +88,6 @@ Core transaction screen for fund transfers (FR-14). Designed for speed — users
 - "From Account" selector for multi-account users (FR-10)
 
 ![Screen 4: Send Money Screen](../screenshots/Screenshot%202026-07-20%20203234.png)
-
----
 
 ## Screen 5: Transaction History
 
@@ -114,8 +102,6 @@ Complete transaction record with filtering and search capabilities (FR-09). User
 
 ![Screen 5: Transaction History Screen](../screenshots/Screenshot%202026-07-20%20203247.png)
 
----
-
 ## Screen 6: Profile & Settings
 
 User profile management with KYC verification status, security settings, and preferences (FR-11, FR-12).
@@ -128,8 +114,6 @@ User profile management with KYC verification status, security settings, and pre
 - Settings organized in logical groups with icons
 
 ![Screen 6: Profile & Settings Screen](../screenshots/Screenshot%202026-07-20%20203313.png)
-
----
 
 ## Screen 7: Notifications
 
@@ -144,8 +128,6 @@ Multi-channel notification center showing transaction alerts, security events, a
 
 ![Screen 7: Notifications Screen](../screenshots/Screenshot%202026-07-20%20203327.png)
 
----
-
 ## Screen 8: Admin Dashboard (Web Application)
 
 System administration panel for monitoring platform health, managing users, and reviewing fraud alerts (FR-32, FR-33, FR-35). This is a web-based interface designed for desktop use by system administrators.
@@ -159,8 +141,6 @@ System administration panel for monitoring platform health, managing users, and 
 
 ![Screen 8: Admin Dashboard (Web)](../screenshots/Screenshot%202026-07-20%20203346.png)
 
----
-
 ## Screen Summary
 
 | # | Screen | Platform | User Type | Key FRs Addressed |
@@ -173,8 +153,6 @@ System administration panel for monitoring platform health, managing users, and 
 | 6 | Profile & Settings | Mobile | Customers | FR-11, FR-12, FR-30 |
 | 7 | Notifications | Mobile | Customers | FR-20, FR-28, FR-29, FR-30, FR-31 |
 | 8 | Admin Dashboard | Web (Desktop) | Administrators | FR-32, FR-33, FR-34, FR-35 |
-
----
 
 ## Design Tool & Access
 
