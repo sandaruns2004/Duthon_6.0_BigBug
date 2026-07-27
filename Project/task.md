@@ -19,32 +19,32 @@
 - [x] Create standardized Dockerfile template for Node.js/Express microservices
 
 ### 1.2 API Gateway (`services/api-gateway` on port 3000)
-- [ ] Initialize Express.js app with `cors`, `helmet`, and `express-json`
-- [ ] Implement `express-rate-limit` backed by Redis (100 req/min for authenticated, 20 req/min for public)
-- [ ] Create JWT validation middleware (`jsonwebtoken`) with route whitelisting (`/api/auth/*`)
-- [ ] Configure `http-proxy-middleware` routing:
-  - [ ] `/api/auth/*` -> `http://auth-service:3001`
-  - [ ] `/api/accounts/*`, `/api/payments/*`, `/api/loans/*` -> `http://account-service:3002`
-  - [ ] `/api/transactions/*` -> `http://transaction-service:3003`
-  - [ ] `/api/notifications/*`, `/api/audit/*` -> `http://notification-service:3004`
-  - [ ] `/api/admin/*` -> `http://admin-service:3005`
-- [ ] Implement Winston request logger middleware (JSON structured logs)
-- [ ] Add `/health` endpoint
+- [x] Initialize Express.js app with `cors`, `helmet`, and `express-json`
+- [x] Implement `express-rate-limit` backed by Redis (100 req/min for authenticated, 20 req/min for public)
+- [x] Create JWT validation middleware (`jsonwebtoken`) with route whitelisting (`/api/auth/*`)
+- [x] Configure `http-proxy-middleware` routing:
+  - [x] `/api/auth/*` -> `http://auth-service:3001`
+  - [x] `/api/accounts/*`, `/api/payments/*`, `/api/loans/*` -> `http://account-service:3002`
+  - [x] `/api/transactions/*` -> `http://transaction-service:3003`
+  - [x] `/api/notifications/*`, `/api/audit/*` -> `http://notification-service:3004`
+  - [x] `/api/admin/*` -> `http://admin-service:3005`
+- [x] Implement Winston request logger middleware (JSON structured logs)
+- [x] Add `/health` endpoint
 
 ### 1.3 Auth Service (`services/auth-service` on port 3001)
-- [ ] Initialize Express.js app and install `@prisma/client`, `bcrypt`, `jsonwebtoken`, `zod`, `ioredis`
-- [ ] Create Prisma schema for `auth_schema`:
-  - [ ] `User` model (`id`, `email`, `phone`, `nic`, `passwordHash`, `role`, `failedAttempts`, `isLocked`, `kycStatus`)
-  - [ ] `RefreshToken` model (`id`, `userId`, `tokenHash`, `expiresAt`)
-  - [ ] `OtpRecord` model (`id`, `userId`, `otpHash`, `type`, `expiresAt`)
-- [ ] Implement `POST /api/auth/register` (Zod validation, bcrypt password hashing cost=12)
-- [ ] Implement `POST /api/auth/login` (credential check, failed attempts counter, account lockout after 5 fails)
-- [ ] Implement MFA OTP Generation (`POST /api/auth/login` triggers OTP email & caches hash in Redis with 5-min TTL)
-- [ ] Implement `POST /api/auth/verify-otp` (verify OTP against Redis -> issue access token 15m & refresh token 7d)
-- [ ] Implement `POST /api/auth/refresh` (validate refresh token -> issue new access token)
-- [ ] Implement `GET /api/users/profile` and `PUT /api/users/profile`
-- [ ] Implement `POST /api/users/kyc` (NIC document reference upload)
-- [ ] Add `/health` endpoint
+- [x] Initialize Express.js app and install `@prisma/client`, `bcrypt`, `jsonwebtoken`, `zod`, `ioredis`
+- [x] Create Prisma schema for `auth_schema`:
+  - [x] `User` model (`id`, `email`, `phone`, `nic`, `passwordHash`, `role`, `failedAttempts`, `isLocked`, `kycStatus`)
+  - [x] `RefreshToken` model (`id`, `userId`, `tokenHash`, `expiresAt`)
+  - [x] `OtpRecord` model (`id`, `userId`, `otpHash`, `type`, `expiresAt`)
+- [x] Implement `POST /api/auth/register` (Zod validation, bcrypt password hashing cost=12)
+- [x] Implement `POST /api/auth/login` (credential check, failed attempts counter, account lockout after 5 fails)
+- [x] Implement MFA OTP Generation (`POST /api/auth/login` triggers OTP email & caches hash in Redis with 5-min TTL)
+- [x] Implement `POST /api/auth/verify-otp` (verify OTP against Redis -> issue access token 15m & refresh token 7d)
+- [x] Implement `POST /api/auth/refresh` (validate refresh token -> issue new access token)
+- [x] Implement `GET /api/users/profile` and `PUT /api/users/profile`
+- [x] Implement `POST /api/users/kyc` (NIC document reference upload)
+- [x] Add `/health` endpoint
 
 ---
 
