@@ -51,36 +51,36 @@
 ## 🟡 Stage 2: Account Service, ACID Fund Transfers & Fraud Engine
 
 ### 2.1 Account Service (`services/account-service` on port 3002)
-- [ ] Initialize Express.js app with Prisma client
-- [ ] Create Prisma schema for `acct_schema`:
-  - [ ] `Account` model (`id`, `userId`, `accountNumber`, `accountType=SAVINGS|CURRENT|BUSINESS`, `balance`, `currency=LKR`, `status=ACTIVE|FROZEN|CLOSED`)
-  - [ ] `Loan` model (`id`, `userId`, `accountId`, `amount`, `interestRate`, `termMonths`, `monthlyPayment`, `status=PENDING|APPROVED|ACTIVE|PAID`)
-- [ ] Implement `POST /api/accounts` (auto-generate unique 12-digit account number, default 0 balance)
-- [ ] Implement `GET /api/accounts` (list all accounts for authenticated user)
-- [ ] Implement `GET /api/accounts/:id/balance` (real-time balance check for internal/external queries)
-- [ ] Implement internal `POST /api/accounts/execute-transfer`:
-  - [ ] Execute atomic SQL transaction (`BEGIN` -> debit sender if balance sufficient -> credit receiver -> `COMMIT`)
-  - [ ] Handle automatic rollback if sender has insufficient funds
-- [ ] Add `/health` endpoint
+- [x] Initialize Express.js app with Prisma client
+- [x] Create Prisma schema for `acct_schema`:
+  - [x] `Account` model (`id`, `userId`, `accountNumber`, `accountType=SAVINGS|CURRENT|BUSINESS`, `balance`, `currency=LKR`, `status=ACTIVE|FROZEN|CLOSED`)
+  - [x] `Loan` model (`id`, `userId`, `accountId`, `amount`, `interestRate`, `termMonths`, `monthlyPayment`, `status=PENDING|APPROVED|ACTIVE|PAID`)
+- [x] Implement `POST /api/accounts` (auto-generate unique 12-digit account number, default 0 balance)
+- [x] Implement `GET /api/accounts` (list all accounts for authenticated user)
+- [x] Implement `GET /api/accounts/:id/balance` (real-time balance check for internal/external queries)
+- [x] Implement internal `POST /api/accounts/execute-transfer`:
+  - [x] Execute atomic SQL transaction (`BEGIN` -> debit sender if balance sufficient -> credit receiver -> `COMMIT`)
+  - [x] Handle automatic rollback if sender has insufficient funds
+- [x] Add `/health` endpoint
 
 ### 2.2 Transaction Service (`services/transaction-service` on port 3003)
-- [ ] Initialize Express.js app with Prisma client
-- [ ] Create Prisma schema for `txn_schema`:
-  - [ ] `Transaction` model (`id`, `fromAccountId`, `toAccountId`, `amount`, `currency`, `type=TRANSFER|PAYMENT|DEPOSIT`, `status`, `referenceNumber`, `fraudFlag`, `description`)
-  - [ ] `FraudAlert` model (`id`, `transactionId`, `ruleTriggered`, `riskScore`, `status=FLAGGED|REVIEWED|CLEARED`)
-- [ ] Build Rule-Based Fraud Detection Engine:
-  - [ ] Rule 1: High transfer amount (`amount > 500,000 LKR` -> flag)
-  - [ ] Rule 2: High velocity (`> 3 transfers within 10 minutes` -> flag)
-  - [ ] Rule 3: Large transfer to new recipient (`amount > 100,000 LKR` -> flag)
-- [ ] Implement `POST /api/transactions/transfer`:
-  - [ ] Check sender balance via HTTP `GET http://account-service:3002/api/accounts/:id/balance`
-  - [ ] Execute fraud detection rules
-  - [ ] Call Account Service `POST http://account-service:3002/api/accounts/execute-transfer`
-  - [ ] Save transaction record in `txn_schema.transactions`
-  - [ ] Dispatch async fire-and-forget alert to Notification Service (`POST /internal/notify` and `/internal/audit`)
-- [ ] Implement `GET /api/transactions` (paginated history with type/date filters)
-- [ ] Implement `GET /api/transactions/:id` and `GET /api/transactions/:id/receipt`
-- [ ] Add `/health` endpoint
+- [x] Initialize Express.js app with Prisma client
+- [x] Create Prisma schema for `txn_schema`:
+  - [x] `Transaction` model (`id`, `fromAccountId`, `toAccountId`, `amount`, `currency`, `type=TRANSFER|PAYMENT|DEPOSIT`, `status`, `referenceNumber`, `fraudFlag`, `description`)
+  - [x] `FraudAlert` model (`id`, `transactionId`, `ruleTriggered`, `riskScore`, `status=FLAGGED|REVIEWED|CLEARED`)
+- [x] Build Rule-Based Fraud Detection Engine:
+  - [x] Rule 1: High transfer amount (`amount > 500,000 LKR` -> flag)
+  - [x] Rule 2: High velocity (`> 3 transfers within 10 minutes` -> flag)
+  - [x] Rule 3: Large transfer to new recipient (`amount > 100,000 LKR` -> flag)
+- [x] Implement `POST /api/transactions/transfer`:
+  - [x] Check sender balance via HTTP `GET http://account-service:3002/api/accounts/:id/balance`
+  - [x] Execute fraud detection rules
+  - [x] Call Account Service `POST http://account-service:3002/api/accounts/execute-transfer`
+  - [x] Save transaction record in `txn_schema.transactions`
+  - [x] Dispatch async fire-and-forget alert to Notification Service (`POST /internal/notify` and `/internal/audit`)
+- [x] Implement `GET /api/transactions` (paginated history with type/date filters)
+- [x] Implement `GET /api/transactions/:id` and `GET /api/transactions/:id/receipt`
+- [x] Add `/health` endpoint
 
 ---
 
