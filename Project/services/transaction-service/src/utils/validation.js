@@ -12,6 +12,19 @@ const transferSchema = z.object({
   description: z.string().optional()
 });
 
+const externalTransferSchema = z.object({
+  fromAccountId: z.string().min(1, 'Source account ID is required'),
+  toExternalAccount: z.string().optional(),
+  toAccountId: z.string().optional(),
+  toBankCode: z.string().optional().default('SWIFT-INTL'),
+  network: z.string().optional().default('SWIFT'),
+  amount: z.union([z.number().positive(), z.string()]),
+  currency: z.string().optional().default('LKR'),
+  description: z.string().optional()
+}).refine((data) => data.toExternalAccount || data.toAccountId, {
+  message: 'Either toExternalAccount or toAccountId is required'
+});
+
 const validate = (schema) => (req, res, next) => {
   try {
     const parsed = schema.parse(req.body);
@@ -35,5 +48,6 @@ const validate = (schema) => (req, res, next) => {
 
 module.exports = {
   transferSchema,
+  externalTransferSchema,
   validate
 };

@@ -4,6 +4,7 @@ const { prisma } = require('../config/db');
 const { logger } = require('../config/logger');
 const { evaluateFraudRules } = require('../utils/fraudEngine');
 const { dispatchAsyncNotifications } = require('../utils/notifier');
+const { simulateISO8583Clearing } = require('../utils/iso8583');
 
 // ═══════════════════════════════════════════════════════════════════
 // Transaction Controller (Transfer, Balance Pre-Check, Fraud & Receipts)
@@ -329,8 +330,181 @@ const getReceipt = async (req, res) => {
   }
 };
 
+/**
+ * POST /api/transactions/external-transfer
+ * Simulates ISO 8583 message clearing for VISA / Mastercard / SWIFT interbank remittances
+ */
+const externalTransfer = async (req, res) => {
+  try {
+    const userId = getAuthenticatedUserId(req);
+    const userEmail = req.headers['x-user-email'] || 'customer@aegisvault.com';
+    const {
+      fromAccountId,
+      toExternalAccount,
+      toAccountId,
+      toBankCode = 'SWIFT-INTL',
+      network = 'SWIFT',
+      amount,
+      currency = 'LKR',
+      description
+    } = req.body;
+
+    const destinationAccount = toExternalAccount || toAccountId;
+    const numericAmount = Number(amount);
+    const referenceNumber = generateReferenceNumber();
+
+    // 1. Balance Pre-Check via Account Service
+    try {
+      const balUrl = `${ACCOUNT_SERVICE_URL}/api/accounts/${fromAccountId}/balance`;
+      const balResponse = await axios.get(balUrl, { timeout: 3000 });
+      const { balance, status } = balResponse.data;
+
+      if (status !== 'ACTIVE') {
+        return res.status(400).json({
+          success: false,
+          error: `Source account is ${status}. Transfer rejected.`
+        });
+      }
+
+      if (Number(balance) < numericAmount) {
+        return res.status(400).json({
+          success: false,
+          error: 'Insufficient funds in source account for external remittance.',
+          code: 'INSUFFICIENT_FUNDS'
+        });
+      }
+    } catch (err) {
+      const resp = err.response;
+      logger.warn('Account Service balance check failed for external transfer:', {
+        error: resp ? resp.data : err.message
+      });
+
+      return res.status(resp ? resp.status : 502).json({
+        success: false,
+        error: (resp && resp.data && resp.data.error) || 'Failed to verify account status with Account Service.',
+        code: (resp && resp.data && resp.data.code) || 'ACCOUNT_SERVICE_UNREACHABLE'
+      });
+    }
+
+    // 2. Real-time Fraud Rule Evaluation
+    const fraudEvaluation = await evaluateFraudRules({
+      fromAccountId,
+      toAccountId: destinationAccount,
+      amount: numericAmount
+    });
+
+    // 3. Simulate ISO 8583 Message Clearing (VISA / Mastercard / SWIFT / CEFT / SLIPS)
+    const clearingResult = simulateISO8583Clearing({
+      amount: numericAmount,
+      currency,
+      network,
+      toBankCode,
+      destinationAccount
+    });
+
+    if (!clearingResult.success) {
+      return res.status(422).json({
+        success: false,
+        error: `External clearing declined: ${clearingResult.iso8583.responseMessage}`,
+        code: 'EXTERNAL_CLEARING_DECLINED',
+        iso8583: clearingResult.iso8583
+      });
+    }
+
+    // 4. Debit Sender in Account Service
+    try {
+      const debitUrl = `${ACCOUNT_SERVICE_URL}/api/accounts/debit`;
+      await axios.post(
+        debitUrl,
+        {
+          accountId: fromAccountId,
+          amount: numericAmount,
+          description: description || `External remittance via ${network.toUpperCase()} to ${destinationAccount}`,
+          referenceNumber
+        },
+        { timeout: 5000 }
+      );
+    } catch (debitErr) {
+      const resp = debitErr.response;
+      logger.warn('Account Service debit failed during external transfer:', {
+        status: resp ? resp.status : 'NO_RESPONSE',
+        error: resp ? resp.data : debitErr.message
+      });
+
+      return res.status(resp ? resp.status : 502).json({
+        success: false,
+        error: (resp && resp.data && resp.data.error) || 'Fund transfer debit failed in Account Service.',
+        code: (resp && resp.data && resp.data.code) || 'DEBIT_EXECUTION_FAILED'
+      });
+    }
+
+    // 5. Store Transaction Record
+    const record = await prisma.$transaction(async (tx) => {
+      const newTxn = await tx.transaction.create({
+        data: {
+          userId: userId ? String(userId) : null,
+          fromAccountId,
+          toAccountId: destinationAccount,
+          amount: numericAmount,
+          currency: currency || 'LKR',
+          type: 'TRANSFER',
+          status: fraudEvaluation.isFlagged ? 'FLAGGED' : 'SUCCESS',
+          referenceNumber,
+          fraudFlag: fraudEvaluation.isFlagged,
+          description: description || `ISO 8583 ${network.toUpperCase()} remittance to ${destinationAccount} (${toBankCode})`
+        }
+      });
+
+      if (fraudEvaluation.isFlagged) {
+        await Promise.all(
+          fraudEvaluation.triggeredRules.map((ruleItem) =>
+            tx.fraudAlert.create({
+              data: {
+                transactionId: newTxn.id,
+                ruleTriggered: ruleItem.rule,
+                riskScore: ruleItem.riskScore,
+                status: 'FLAGGED'
+              }
+            })
+          )
+        );
+      }
+
+      return newTxn;
+    });
+
+    // 6. Async Fire-and-Forget Notification & Audit Trail
+    dispatchAsyncNotifications({ transaction: record, fraudEvaluation, userEmail });
+
+    logger.info('🌐 External remittance cleared and completed:', {
+      referenceNumber,
+      fromAccountId,
+      destinationAccount,
+      network: clearingResult.iso8583.network,
+      amount: numericAmount,
+      rrn: clearingResult.iso8583.rrn
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: `External transfer of LKR ${numericAmount.toLocaleString()} via ${network.toUpperCase()} cleared and processed successfully.`,
+      transaction: record,
+      iso8583: clearingResult.iso8583,
+      fraudEvaluation
+    });
+  } catch (err) {
+    logger.error('External transfer orchestration error:', { error: err.message, stack: err.stack });
+    return res.status(500).json({
+      success: false,
+      error: 'External remittance processing failed. Please try again later.',
+      code: 'EXTERNAL_TRANSFER_ERROR'
+    });
+  }
+};
+
 module.exports = {
   transfer,
+  externalTransfer,
   listTransactions,
   getTransaction,
   getReceipt

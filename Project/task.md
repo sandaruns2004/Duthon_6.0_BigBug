@@ -87,13 +87,13 @@
 ## 🟠 Stage 3: Payment Operations, Loans & External Network Gateway
 
 ### 3.1 Utility Bill Payments & Loans Engine
-- [ ] Implement `POST /api/payments/bill` in Account Service (debit account, generate utility receipt for Electricity, Water, Internet, Mobile)
-- [ ] Implement `POST /api/loans/apply` in Account Service (calculate monthly amortization payment, store loan request)
-- [ ] Implement `GET /api/loans` and `GET /api/loans/:id` (return amortization schedule and payment status)
+- [x] Implement `POST /api/payments/bill` in Account Service (debit account, generate utility receipt for Electricity, Water, Internet, Mobile)
+- [x] Implement `POST /api/loans/apply` in Account Service (calculate monthly amortization payment, store loan request)
+- [x] Implement `GET /api/loans` and `GET /api/loans/:id` (return amortization schedule and payment status)
 
 ### 3.2 External Financial Ecosystem Mock Gateway (F12)
-- [ ] Implement mock external clearing endpoint `POST /api/transactions/external-transfer` in Transaction Service
-- [ ] Simulate ISO 8583 message clearing for VISA / Mastercard / SWIFT interbank remittances (with 99.9% clearing response)
+- [x] Implement mock external clearing endpoint `POST /api/transactions/external-transfer` in Transaction Service
+- [x] Simulate ISO 8583 message clearing for VISA / Mastercard / SWIFT interbank remittances (with 99.9% clearing response)
 
 ---
 

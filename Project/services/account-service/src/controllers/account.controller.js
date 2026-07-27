@@ -371,10 +371,136 @@ const payBill = async (req, res) => {
   }
 };
 
+/**
+ * POST /api/accounts/debit
+ * Debits an account balance for external transfers, withdrawals, or clearing
+ */
+const debitAccount = async (req, res) => {
+  try {
+    const { accountId, amount, description, referenceNumber } = req.body;
+    const debitAmount = Number(amount);
+
+    if (isNaN(debitAmount) || debitAmount <= 0) {
+      return res.status(400).json({ success: false, error: 'Debit amount must be a positive number.' });
+    }
+
+    const updatedAccount = await prisma.$transaction(async (tx) => {
+      const account = await tx.account.findFirst({
+        where: {
+          OR: [
+            { id: accountId },
+            { accountNumber: accountId }
+          ]
+        }
+      });
+
+      if (!account || account.status !== 'ACTIVE') {
+        const error = new Error('Account not found or inactive.');
+        error.code = 'INVALID_ACCOUNT';
+        throw error;
+      }
+
+      if (Number(account.balance) < debitAmount) {
+        const error = new Error('Insufficient funds in account.');
+        error.code = 'INSUFFICIENT_FUNDS';
+        throw error;
+      }
+
+      return await tx.account.update({
+        where: { id: account.id },
+        data: { balance: { decrement: debitAmount } }
+      });
+    });
+
+    logger.info('💸 Account debited successfully:', {
+      accountId: updatedAccount.id,
+      amount: debitAmount,
+      referenceNumber
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Account debited successfully.',
+      account: {
+        id: updatedAccount.id,
+        accountNumber: updatedAccount.accountNumber,
+        newBalance: Number(updatedAccount.balance)
+      }
+    });
+  } catch (err) {
+    if (err.code === 'INSUFFICIENT_FUNDS' || err.code === 'INVALID_ACCOUNT') {
+      return res.status(400).json({ success: false, error: err.message, code: err.code });
+    }
+    logger.error('Debit account error:', { error: err.message });
+    return res.status(500).json({ success: false, error: 'Account debit failed.' });
+  }
+};
+
+/**
+ * POST /api/accounts/credit
+ * Credits an account balance for external deposits, settlements, or clearing
+ */
+const creditAccount = async (req, res) => {
+  try {
+    const { accountId, amount, description, referenceNumber } = req.body;
+    const creditAmount = Number(amount);
+
+    if (isNaN(creditAmount) || creditAmount <= 0) {
+      return res.status(400).json({ success: false, error: 'Credit amount must be a positive number.' });
+    }
+
+    const updatedAccount = await prisma.$transaction(async (tx) => {
+      const account = await tx.account.findFirst({
+        where: {
+          OR: [
+            { id: accountId },
+            { accountNumber: accountId }
+          ]
+        }
+      });
+
+      if (!account || account.status !== 'ACTIVE') {
+        const error = new Error('Account not found or inactive.');
+        error.code = 'INVALID_ACCOUNT';
+        throw error;
+      }
+
+      return await tx.account.update({
+        where: { id: account.id },
+        data: { balance: { increment: creditAmount } }
+      });
+    });
+
+    logger.info('💰 Account credited successfully:', {
+      accountId: updatedAccount.id,
+      amount: creditAmount,
+      referenceNumber
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Account credited successfully.',
+      account: {
+        id: updatedAccount.id,
+        accountNumber: updatedAccount.accountNumber,
+        newBalance: Number(updatedAccount.balance)
+      }
+    });
+  } catch (err) {
+    if (err.code === 'INVALID_ACCOUNT') {
+      return res.status(400).json({ success: false, error: err.message, code: err.code });
+    }
+    logger.error('Credit account error:', { error: err.message });
+    return res.status(500).json({ success: false, error: 'Account credit failed.' });
+  }
+};
+
 module.exports = {
   createAccount,
   listAccounts,
   getBalance,
   executeTransfer,
-  payBill
+  payBill,
+  debitAccount,
+  creditAccount
 };

@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const { logger, requestLogger } = require('./config/logger');
 const accountRoutes = require('./routes/account.routes');
 const paymentRoutes = require('./routes/payment.routes');
+const loanRoutes = require('./routes/loan.routes');
 
 // ═══════════════════════════════════════════════════════════════════
 // AegisVault Account Service (Port 3002)
@@ -40,12 +41,14 @@ app.get('/health', (req, res) => {
   });
 });
 
-// 5. Mount Account & Payment Routes
+// 5. Mount Account, Payment & Loan Routes
 // Supports both /api/accounts and direct path prefixes for reverse proxy flexibility
 app.use('/api/accounts', accountRoutes);
 app.use('/accounts', accountRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/payments', paymentRoutes);
+app.use('/api/loans', loanRoutes);
+app.use('/loans', loanRoutes);
 app.use('/', accountRoutes);
 
 // 6. 404 Fallback Handler

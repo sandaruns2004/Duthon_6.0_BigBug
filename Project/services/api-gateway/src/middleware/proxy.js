@@ -62,6 +62,7 @@ const createServiceProxy = (targetUrl, serviceName) => {
 const setupProxies = (app) => {
   // Auth Service (Port 3001)
   app.use('/api/auth', createServiceProxy(SERVICES.AUTH, 'auth-service'));
+  app.use('/api/users', createServiceProxy(SERVICES.AUTH, 'auth-service'));
 
   // Account Service (Port 3002) - handles accounts, payments, and loans
   app.use('/api/accounts', createServiceProxy(SERVICES.ACCOUNT, 'account-service'));

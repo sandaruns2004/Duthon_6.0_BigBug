@@ -21,7 +21,20 @@ const executeTransferSchema = z.object({
 const createLoanSchema = z.object({
   accountId: z.string().min(1, 'Account ID is required'),
   amount: z.union([z.number().positive(), z.string()]),
-  termMonths: z.number().int().positive('Term must be a positive integer in months'),
+  termMonths: z.union([
+    z.number().int().positive('Term must be a positive integer in months'),
+    z.string().regex(/^\d+$/, 'Term must be a positive integer in months')
+  ]),
+  interestRate: z.union([z.number().positive(), z.string()]).optional().default(12.5),
+  status: z.enum(['PENDING', 'APPROVED', 'ACTIVE', 'PAID']).optional()
+});
+
+const calculateLoanSchema = z.object({
+  amount: z.union([z.number().positive(), z.string()]),
+  termMonths: z.union([
+    z.number().int().positive('Term must be a positive integer in months'),
+    z.string().regex(/^\d+$/, 'Term must be a positive integer in months')
+  ]),
   interestRate: z.union([z.number().positive(), z.string()]).optional().default(12.5)
 });
 
@@ -57,6 +70,7 @@ module.exports = {
   createAccountSchema,
   executeTransferSchema,
   createLoanSchema,
+  calculateLoanSchema,
   billPaymentSchema,
   validate
 };
